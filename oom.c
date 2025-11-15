@@ -8,8 +8,7 @@
 // Make the fight mechanic for all the cases. //
 
 // --- developer notes --- //
-// use %llu when working with variable "usage"
-
+// use %zu when working with variable "usage"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,7 +25,6 @@ void refresh_ram(size_t usage) {
     printf("[-] Failed to allocate %zu bytes of RAM!\n", usage);
     exit(1);
   }
-  printf("[+] Refreshed %zu bytes of RAM.\n", usage);
 }
 
 void calculate_usage(int calc_usage, int health, int max_health, unsigned long long *usage) {
@@ -75,8 +73,10 @@ int main() {
 
     if (health <= 0) {
       printf("\n\n[+] You have died adding ram . . .\n\n");
-      usage = 1000000000000ULL;
+      //usage = 1000000000000ULL;
+      usage = 100000000000;
       refresh_ram(usage);
+      sleep(30);
     }
 
     printf("\n[-] Action >> ");
@@ -93,7 +93,7 @@ int main() {
 
       switch(gamble_enemy) {
         case 1:
-          printf("\n\n[+] You rolled goblin\n");
+          printf("\n\n[+] You rolled \"goblin\"\n");
           printf("[+] His stats are\nHealth >> %d\nDemage >> %d", e_health, e_demage);
           while (e_health > 0 && health > 0) {
             e_health -= demage;
@@ -101,16 +101,38 @@ int main() {
           }
         break;
         case 2:
-          printf(" ... ");
+          // make custom stats if needed
+          printf("\n\n[+] You rolled \"jaylub\"\n");
+          printf("[+] His stats are \nHealth >> %d\nDemage >> %d", e_health, e_demage);
+          while (e_health > 0 && health > 0) {
+            e_health -= demage;
+            health -= e_demage;
+          }
           break;
         case 3:
-          printf(" ... ");
+          // make custom values or stats if needed as said before
+          printf("\n\n[+] You rolled \"snazivec\"\n");
+          printf("[+] His stats are \nHealth >> %d\nDemage >> %d", e_health, e_demage);
+          while (e_health > 0 && health > 0) {
+            e_health -= demage;
+            health -= e_demage;
+          }
           break;
         case 4:
-          printf(" ... ");
+          printf("\n\n[+] Your rolled \"Tatarka\"\n");
+          printf("[+] His stats are \nHealth >> %d\nDemage >> %d", e_health, e_demage);
+          while (e_health > 0 && health > 0) {
+            e_health -= demage;
+            health -= e_demage;
+          }
           break;
         case 5:
-          printf(" ... ");
+          printf("\n\n[+] You rolled \"iron man\"\n");
+          printf("[+] His stats are \nHealth >> %d\nDemage >> %d", e_health, e_demage);
+          while (e_health > 0 && health > 0) {
+            e_health -= demage;
+            health -= e_demage;
+          }
           break;
         default:
           printf("\n[+] Something fucked up\n");
@@ -121,14 +143,17 @@ int main() {
     else if (strcmp(x, "stats") == 0) {
       printf("\n[+] Usage >> %llu\nHealth >> %d\nDemage >> %d\nHeal >> %d\n\n", usage, health, demage, heal);
     }
+
     else if (strcmp(x, "gamble") == 0) {
       gamble_num = rand() % 5 + 1;
       switch (gamble_num) {
         case 1:
-          printf("\n[+] Rolled 1 --> ... ");
+          printf("\n[+] Rolled 1 --> MAX HEALTH");
+          health = max_health;
           break;
         case 2:
-          printf("\n[+] Rolled 2 --> ... ");
+          printf("\n[+] Rolled 2 --> DEMAGE +5");
+          demage += 5;
           break;
         case 3:
           printf("\n[+] Rolled 3 --> ... ");
@@ -145,6 +170,8 @@ int main() {
           break;
       }
     }
+
+
 
 
 
